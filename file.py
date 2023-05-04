@@ -16,5 +16,5 @@ class OpenFile:
         #print("Lineas::",line)
         return line
 
-#read_file = OpenFile.read_file()
-#show = OpenFile.show_line(read_file[0])
+read_file = OpenFile.read_file()
+show = OpenFile.show_line(read_file[0])
