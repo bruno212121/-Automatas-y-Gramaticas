@@ -1,13 +1,13 @@
 import datetime
 from data_validator import DataFilter
-from file import OpenFile
+from file_logic import FileDescriptor
 from user import User
 from input import Input
 
 
 class FileService:
     get_data = DataFilter()
-    file_descriptor = OpenFile()
+    file_descriptor = FileDescriptor()
     input = Input()
 
     def get_macs_by_user(self):

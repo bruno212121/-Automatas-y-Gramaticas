@@ -1,27 +1,34 @@
 import re
-from file import OpenFile
+from file_logic import FileDescriptor
 
 
 class DataFilter:
+    file_descriptor = FileDescriptor()
 
-    file = OpenFile() 
-
-    @staticmethod # Static method to filter the data
+    @staticmethod
     def get_mac_ap(line):
-        mac_ap = re.search(r'([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})', line)
-        return mac_ap.group(0)
-    
+        mac_ap = re.search('(^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2}):UM$)', line)
+        try:
+            return mac_ap.group(0)
+        except:
+            return None
+
     @staticmethod
     def get_mac(line):
-        mac = re.search(r'([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})', line)
-        return mac.group(0)
+        mac = re.search('([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})', line)
+        try:
+            return mac.group(0)
+        except:
+            return None
 
     @staticmethod
     def get_conection_id(line):
         user_id = re.search('([\w\d]){16}', line)
-        return user_id.group(0)
-    
-    @staticmethod
+        try:
+            return user_id.group(0)
+        except:
+            return None
+
     def get_lines_by_user(self, user_id) -> list:
         lines = self.file_descriptor.read_file()
         list_lines = []
@@ -31,7 +38,6 @@ class DataFilter:
                 list_lines.append(line)
         return list_lines
 
-    @staticmethod
     def get_lines_by_mac_ap(self, mac_ap: str) -> list:
         lines = self.file_descriptor.read_file()
         list_lines = []
